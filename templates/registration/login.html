@@ -21,5 +21,8 @@ Login
             <input type="hidden" name="next" value="{{ next }}">
             <input type="submit" value="Login">
         </form>
+        <p>
+            <a href="{% url 'password_reset' %}">Forgot your password?</a>
+        </p>
     </div>
 {% endblock %}
