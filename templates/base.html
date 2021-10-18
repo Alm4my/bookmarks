@@ -20,6 +20,9 @@
                 <li {% if section == 'people' %} class="selected" {% endif %} >
                     <a href="#">People</a>
                 </li>
+                <li>
+                    <a href="{% url 'password_change' %}">Change Password</a>
+                </li>
             </ul>
         {% endif %}
 
