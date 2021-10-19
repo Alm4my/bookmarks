@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from account.forms import UserRegistrationForm
+from account.models import Profile
 
 
 @login_required
@@ -23,6 +24,8 @@ def register(request):
             )
             # save the User object
             new_user.save()
+            # create user profile
+            Profile.objects.create(user=new_user)
             return render(request, 'account/register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
