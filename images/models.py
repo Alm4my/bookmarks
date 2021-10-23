@@ -1,5 +1,6 @@
 from django.db.models import Model, ForeignKey, CASCADE, CharField, SlugField, URLField, ImageField, TextField, \
     DateField, ManyToManyField
+from django.urls import reverse
 from django.utils.text import slugify
 
 from bookmarks import settings
@@ -27,3 +28,6 @@ class Image(Model):
     users_like = ManyToManyField(settings.AUTH_USER_MODEL,
                                  related_name='images_liked',
                                  blank=True)
+
+    def get_absolute_url(self):
+        return reverse('images:detail', args=[self.id, self.slug])
