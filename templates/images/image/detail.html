@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 
 {% block title %}{{ image.title }}{% endblock %}
 
@@ -28,7 +29,7 @@
     <div class="image-likes">
       {% for user in users_like %}
         <div>
-          <img src="{{ user.profile.photo }}" alt="profile">
+          <img src="{% thumbnail user.profile.photo 200x200 %}" alt="profile">
           <p>{{ user.first_name }}</p>
         </div>
       {% empty %}
