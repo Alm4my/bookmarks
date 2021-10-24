@@ -1,3 +1,4 @@
+import redis
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -6,11 +7,15 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 
 from actions.utils import create_action
+from bookmarks import settings
 from common.decorators import ajax_required
 from images.forms import ImageCreateForm
 from images.models import Image
 
+# constant for pagination
 ELEMENTS_PER_PAGE = 6
+# connect to Redis
+r = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
 
 
 @login_required
