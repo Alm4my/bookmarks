@@ -1,5 +1,5 @@
 from django.db.models import Model, ForeignKey, CASCADE, CharField, SlugField, URLField, ImageField, TextField, \
-    DateField, ManyToManyField, DateTimeField
+    DateField, ManyToManyField, DateTimeField, PositiveIntegerField
 from django.urls import reverse
 from django.utils.text import slugify
 
@@ -16,6 +16,7 @@ class Image(Model):
     image = ImageField(upload_to='images/%Y/%m/%d')
     description = TextField(blank=True)
     created = DateField(auto_now_add=True, db_index=True)
+    total_likes = PositiveIntegerField(db_index=True, default=0)
 
     def __str__(self):
         return self.title
