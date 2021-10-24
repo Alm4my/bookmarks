@@ -13,6 +13,8 @@ import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django.urls import reverse_lazy
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -121,7 +123,9 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '462293709405-15ra568gff56b9ue6pdu1d89fand0fkn.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
+}
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
