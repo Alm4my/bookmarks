@@ -30,3 +30,38 @@
 
     {% endwith %}
 {% endblock %}
+
+{% block domready %}
+    $('a.follow').click(function (e) {
+    e.preventDefault();
+    $.post('{% url "user_follow" %}',
+        {
+            id: $(this).data('id'),
+            action: $(this).data('action'),
+        },
+        function (data) {
+            if (data['status'] === 'ok'){
+                let follow_button = $('a.follow')
+                let previous_action = follow_button.data('action');
+
+                // toggle data-action
+                follow_button.data('action', previous_action === 'follow' ? 'unfollow': 'follow');
+
+                // toggle link text
+                follow_button.text(
+                    previous_action === 'follow' ? 'Unfollow' : 'Follow'
+                );
+
+                // update total followers
+                let num_followers_tag = $('span.count .total')
+                let previous_followers = parseInt(
+                    num_followers_tag.text()
+                );
+                num_followers_tag.text(
+                    previous_action === 'follow' ? previous_followers + 1 : previous_followers - 1
+                );
+            }
+        }
+    );
+});
+{% endblock %}
