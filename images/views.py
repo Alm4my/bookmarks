@@ -9,6 +9,7 @@ from common.decorators import ajax_required
 from images.forms import ImageCreateForm
 from images.models import Image
 
+ELEMENTS_PER_PAGE = 6
 
 @login_required
 def image_create(request):
@@ -67,7 +68,7 @@ def image_like(request):
 @login_required
 def image_list(request):
     images = Image.objects.all()
-    paginator = Paginator(images, 6)
+    paginator = Paginator(images, ELEMENTS_PER_PAGE)
     page = request.GET.get('page')
     try:
         images = paginator.page(page)

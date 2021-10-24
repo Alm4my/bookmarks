@@ -17,7 +17,7 @@
     let block_request = false;
 
     $(window).scroll(function() {
-        let margin = $(document).height() - $(window).height() - 200;
+        let margin = $(document).height() - $(window).height() - 200; // 200 pixels (load when user is close to 200px)
         if ($(window).scrollTop() > margin && empty_page == false && block_request == false){
             block_request = true;
             page += 1;
