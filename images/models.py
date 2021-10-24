@@ -1,5 +1,5 @@
 from django.db.models import Model, ForeignKey, CASCADE, CharField, SlugField, URLField, ImageField, TextField, \
-    DateField, ManyToManyField
+    DateField, ManyToManyField, DateTimeField
 from django.urls import reverse
 from django.utils.text import slugify
 
@@ -31,3 +31,16 @@ class Image(Model):
 
     def get_absolute_url(self):
         return reverse('images:detail', args=[self.id, self.slug])
+
+
+class Contact(Model):
+    user_from = ForeignKey('auth.User', related_name='rel_from_set', on_delete=CASCADE)
+    user_to = ForeignKey('auth.User', related_name='rel_to_set', on_delete=CASCADE)
+    created = DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __str__(self):
+        return f'{self.user_from} follows {self.user_to}'
+
