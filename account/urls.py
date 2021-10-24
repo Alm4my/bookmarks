@@ -7,6 +7,9 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     # register
     path('register/', views.register, name='register'),
+    # users
+    path('users/', views.user_list, name='user_list'),
+    path('user/<username>', views.user_detail, name='user_detail'),
     # edit
     path('edit/', views.edit, name='edit'),
     # dashboard
